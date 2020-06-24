@@ -18,6 +18,7 @@ package org.gradle.test.fixtures.file;
 
 import groovy.lang.Closure;
 import org.gradle.api.GradleException;
+import org.gradle.internal.os.OperatingSystem;
 import org.gradle.test.fixtures.ConcurrentTestUtil;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
@@ -30,6 +31,10 @@ import java.util.regex.Pattern;
 
 /**
  * A JUnit rule which provides a unique temporary folder for the test.
+ *
+ * Note: to avoid 260 char path length limitation on Windows, we should keep the test dir path as short as possible,
+ * ideally < 90 chars (from repo root to test dir root, e.g. "subprojects/core/build/tmp/test files/{TestClass}/{testMethod}/qqlj8"),
+ * or < 40 chars for "{TestClass}/{testMethod}/qqlj8"
  */
 abstract class AbstractTestDirectoryProvider implements TestRule, TestDirectoryProvider {
     protected final TestFile root;
@@ -47,7 +52,7 @@ abstract class AbstractTestDirectoryProvider implements TestRule, TestDirectoryP
 
     protected AbstractTestDirectoryProvider(TestFile root, Class<?> testClass) {
         this.root = root;
-        this.className = testClass.getSimpleName();
+        this.className = shortenPathOnWindows(testClass.getSimpleName(), 16);
     }
 
     @Override
@@ -134,11 +139,19 @@ abstract class AbstractTestDirectoryProvider implements TestRule, TestDirectoryP
             methodName = getClass().getSimpleName();
         }
         if (prefix == null) {
-            String safeMethodName = methodName.replaceAll("[^\\w]", "_");
-            if (safeMethodName.length() > 30) {
-                safeMethodName = safeMethodName.substring(0, 19) + "..." + safeMethodName.substring(safeMethodName.length() - 9);
-            }
+            String safeMethodName = shortenPathOnWindows(methodName.replaceAll("[^\\w]", "_"), 16);
             prefix = String.format("%s/%s", className, safeMethodName);
+        }
+    }
+
+    /*
+     Shorten a long name to at most {expectedMaxLength}, replace middle characters with ".".
+     */
+    private String shortenPathOnWindows(String longName, int expectedMaxLength) {
+        if (longName.length() <= expectedMaxLength || OperatingSystem.current().isUnix()) {
+            return longName;
+        } else {
+            return longName.substring(0, (expectedMaxLength - 5)) + "." + longName.substring(longName.length() - 4);
         }
     }
 
