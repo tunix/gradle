@@ -18,7 +18,6 @@ package org.gradle.test.fixtures.file;
 
 import groovy.lang.Closure;
 import org.gradle.api.GradleException;
-import org.gradle.internal.os.OperatingSystem;
 import org.gradle.test.fixtures.ConcurrentTestUtil;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
@@ -148,10 +147,10 @@ abstract class AbstractTestDirectoryProvider implements TestRule, TestDirectoryP
      Shorten a long name to at most {expectedMaxLength}, replace middle characters with ".".
      */
     private String shortenPathOnWindows(String longName, int expectedMaxLength) {
-        if (longName.length() <= expectedMaxLength || OperatingSystem.current().isUnix()) {
+        if (longName.length() <= expectedMaxLength) {
             return longName;
         } else {
-            return longName.substring(0, (expectedMaxLength - 5)) + "." + longName.substring(longName.length() - 4);
+            return longName.substring(0, expectedMaxLength - 5) + "." + longName.substring(longName.length() - 4);
         }
     }
 
