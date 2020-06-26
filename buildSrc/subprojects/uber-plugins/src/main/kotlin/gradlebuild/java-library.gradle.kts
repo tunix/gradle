@@ -19,6 +19,7 @@ import org.gradle.kotlin.dsl.*
 
 plugins {
     `java-library`
+    id("gradlebuild.dependencies-metadata-rules")
     id("gradlebuild.repositories")
     id("gradlebuild.minify")
     id("gradlebuild.reproducible-archives")

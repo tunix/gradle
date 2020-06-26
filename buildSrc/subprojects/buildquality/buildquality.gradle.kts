@@ -1,12 +1,10 @@
 dependencies {
+    implementation(project(":basics"))
     implementation(project(":binaryCompatibility"))
     implementation(project(":cleanup"))
-    implementation(project(":configuration"))
     implementation(project(":docs"))
     implementation(project(":integrationTesting"))
-    implementation(project(":kotlinDsl"))
     implementation(project(":performance"))
-    implementation(project(":plugins"))
     implementation(project(":profiling"))
 
     implementation("org.codenarc:CodeNarc:1.5") {
@@ -18,10 +16,6 @@ dependencies {
 
 gradlePlugin {
     plugins {
-        register("addVerifyProductionEnvironmentTask") {
-            id = "gradlebuild.add-verify-production-environment-task"
-            implementationClass = "org.gradle.gradlebuild.buildquality.VerifyBuildEnvironmentPlugin"
-        }
         register("ciReporting") {
             id = "gradlebuild.ci-reporting"
             implementationClass = "org.gradle.gradlebuild.buildquality.CiReportingPlugin"

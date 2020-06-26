@@ -9,7 +9,7 @@ plugins {
 
 description = "Kotlin Compiler Embeddable - patched for Gradle"
 
-base.archivesBaseName = "kotlin-compiler-embeddable-$kotlinVersion-patched-for-gradle"
+moduleIdentity.baseName.set("kotlin-compiler-embeddable-$kotlinVersion-patched-for-gradle")
 
 dependencies {
     api(futureKotlin("stdlib"))

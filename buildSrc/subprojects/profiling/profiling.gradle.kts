@@ -1,10 +1,8 @@
 dependencies {
     compileOnly("com.gradle:gradle-enterprise-gradle-plugin:3.3.4")
 
-    implementation(project(":configuration"))
+    implementation(project(":basics"))
     implementation(project(":docs"))
-    implementation(project(":kotlinDsl"))
-    implementation(project(":plugins"))
     implementation(project(":packaging"))
 
     implementation("me.champeau.gradle:jmh-gradle-plugin:0.5.0")

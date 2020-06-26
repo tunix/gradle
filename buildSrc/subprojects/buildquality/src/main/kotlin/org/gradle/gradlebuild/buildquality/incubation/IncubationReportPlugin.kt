@@ -16,7 +16,7 @@
 
 package org.gradle.gradlebuild.buildquality.incubation
 
-import accessors.java
+import accessors.sourceSets
 import build.kotlin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -25,7 +25,7 @@ import org.gradle.kotlin.dsl.*
 
 class IncubationReportPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = project.run {
-        val main by java.sourceSets
+        val main by sourceSets
         val reportTask = tasks.register<IncubatingApiReportTask>("incubationReport") {
             description = "Generates a report of incubating APIS"
             title.set(project.name)

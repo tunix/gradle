@@ -28,7 +28,7 @@ plugins {
 
 repositories { handler ->
     // TODO migrate this build script to Kotlin DSL to replace this is a simple googleApisJs()
-    Plugins_extensionsKt.googleApisJs(handler)
+    Build_extensionsKt.googleApisJs(handler)
 }
 
 configurations {

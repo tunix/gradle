@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 import accessors.groovy
-import org.gradle.gradlebuild.BuildEnvironment
+import gradlebuild.basics.BuildEnvironment
 import org.gradle.gradlebuild.test.integrationtests.addDependenciesAndConfigurations
 import org.gradle.gradlebuild.test.integrationtests.SmokeTest
-import org.gradle.gradlebuild.versioning.DetermineCommitId
 import org.gradle.testing.performance.generator.tasks.RemoteProject
 
 plugins {
@@ -108,7 +107,7 @@ tasks {
 
     register<RemoteProject>("gradleBuildCurrent") {
         remoteUri.set(rootDir.absolutePath)
-        ref.set(rootProject.tasks.named<DetermineCommitId>("determineCommitId").flatMap { it.determinedCommitId })
+        ref.set(moduleIdentity.gradleBuildCommitId)
     }
 
     val remoteProjects = withType<RemoteProject>()

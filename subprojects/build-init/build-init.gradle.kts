@@ -92,13 +92,16 @@ tasks {
             findLatest("kotlin", "org.jetbrains.kotlin:kotlin-gradle-plugin:(1.3,)", versionProperties)
 
             val libraryVersionFile = file("src/main/resources/org/gradle/buildinit/tasks/templates/library-versions.properties")
-            org.gradle.build.ReproduciblePropertiesWriter.store(
-                versionProperties,
+            versionProperties.store(
                 libraryVersionFile,
                 "Generated file, please do not edit - Version values used in build-init templates"
             )
         }
     }
+}
+
+fun Properties.store(file: File, comment: String) {
+    org.gradle.internal.util.PropertiesUtils.store(this, file, comment, Charsets.ISO_8859_1, "\n")
 }
 
 fun findLatest(name: String, notation: String, dest: Properties) {

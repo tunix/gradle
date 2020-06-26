@@ -3,10 +3,8 @@ dependencies {
         // TODO turn this around: move corresponding code to this project and let docs depend on it
         because("API metadata generation is part of the DSL guide")
     }
-    implementation(project(":build"))
-    implementation(project(":configuration"))
-    implementation(project(":kotlinDsl"))
-    implementation(project(":versioning"))
+    implementation(project(":basics"))
+    implementation(project(":moduleIdentity"))
 
     implementation("com.google.guava:guava")
     implementation("org.ow2.asm:asm:7.1")
@@ -31,13 +29,13 @@ gradlePlugin {
             id = "gradlebuild.shaded-jar"
             implementationClass = "org.gradle.gradlebuild.packaging.ShadedJarPlugin"
         }
-        register("apiMetadata") {
-            id = "gradlebuild.api-metadata"
-            implementationClass = "org.gradle.gradlebuild.packaging.ApiMetadataPlugin"
-        }
         register("distributions") {
             id = "gradlebuild.distributions"
             implementationClass = "org.gradle.gradlebuild.packaging.GradleDistributionsPlugin"
+        }
+        register("install") {
+            id = "gradlebuild.install"
+            implementationClass = "org.gradle.gradlebuild.packaging.InstallPlugin"
         }
     }
 }

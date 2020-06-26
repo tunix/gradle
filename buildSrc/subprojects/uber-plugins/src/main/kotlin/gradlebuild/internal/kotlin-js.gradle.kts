@@ -20,6 +20,7 @@ import org.jlleitschuh.gradle.ktlint.KtlintCheckTask
 import org.jlleitschuh.gradle.ktlint.KtlintFormatTask
 
 plugins {
+    id("gradlebuild.dependencies-metadata-rules")
     id("kotlin2js")
     id("gradlebuild.repositories")
     id("gradlebuild.unittest-and-compile")

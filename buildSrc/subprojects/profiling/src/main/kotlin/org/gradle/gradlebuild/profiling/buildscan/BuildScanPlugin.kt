@@ -24,10 +24,11 @@ import org.gradle.api.plugins.quality.Checkstyle
 import org.gradle.api.plugins.quality.CodeNarc
 import org.gradle.api.reporting.Reporting
 import org.gradle.api.tasks.compile.AbstractCompile
-import org.gradle.gradlebuild.BuildEnvironment.isCiServer
-import org.gradle.gradlebuild.BuildEnvironment.isGhActions
-import org.gradle.gradlebuild.BuildEnvironment.isJenkins
-import org.gradle.gradlebuild.BuildEnvironment.isTravis
+import gradlebuild.basics.BuildEnvironment.isCiServer
+import gradlebuild.basics.BuildEnvironment.isGhActions
+import gradlebuild.basics.BuildEnvironment.isJenkins
+import gradlebuild.basics.BuildEnvironment.isTravis
+import gradlebuild.basics.kotlindsl.execAndGetStdout
 import org.gradle.gradlebuild.packaging.ClasspathManifest
 import org.gradle.kotlin.dsl.*
 import org.jsoup.Jsoup

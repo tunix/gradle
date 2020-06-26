@@ -24,8 +24,6 @@ plugins {
 
     gradlebuild.buildscan                    // Reporting: Add more data through custom tags to build scans
 
-    gradlebuild.`build-version`              // Release process: Set the version for this build
-
     gradlebuild.ide                          // Local development: Tweak IDEA import
     gradlebuild.`update-versions`            // Local development: Convenience tasks to update versions in this build: 'released-versions.json', 'agp-versions.properties', ...
     gradlebuild.wrapper                      // Local development: Convenience tasks to update the wrapper (like 'nightlyWrapper')

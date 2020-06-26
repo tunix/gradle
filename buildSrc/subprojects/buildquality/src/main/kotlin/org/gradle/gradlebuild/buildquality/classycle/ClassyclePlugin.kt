@@ -20,8 +20,8 @@ import org.gradle.api.Project
 
 import org.gradle.kotlin.dsl.*
 
-import accessors.java
 import accessors.reporting
+import accessors.sourceSets
 
 
 internal
@@ -36,7 +36,7 @@ open class ClassyclePlugin : Plugin<Project> {
         configurations.create(classycleBaseName)
         dependencies.add(classycleBaseName, "classycle:classycle:1.4.2@jar")
         val classycle = tasks.register("classycle")
-        java.sourceSets.all {
+        sourceSets.all {
             val taskName = getTaskName("classycle", null)
             val sourceSetTask = tasks.register(
                 taskName,

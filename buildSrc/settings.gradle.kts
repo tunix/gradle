@@ -34,22 +34,24 @@ fun String.toKebabCase() =
 rootProject.name = "buildSrc"
 
 // Please preserve alphabetical order
+include("basics")
 include("binaryCompatibility")
-include("build")
 include("buildquality")
+include("buildUpdateUtils")
 include("cleanup")
-include("configuration")
+include("dependencyModules")
 include("docs")
 include("ide")
 include("integrationTesting")
+include("jvm")
 include("kotlinDsl")
-include("launchableJar")
+include("lifecycle")
+include("moduleIdentity")
 include("uberPlugins")
 include("packaging")
-include("plugins")
 include("profiling")
+include("publishing")
 include("performance")
-include("versioning")
 include("buildPlatform")
 
 fun buildFileNameFor(projectDirName: String) =

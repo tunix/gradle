@@ -25,7 +25,7 @@ import org.gradle.api.tasks.TaskAction
 
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.tasks.Classpath
-import org.gradle.build.ReproduciblePropertiesWriter
+import org.gradle.internal.util.PropertiesUtils
 import java.io.File
 
 import java.util.Properties
@@ -49,7 +49,7 @@ abstract class ClasspathManifest : DefaultTask() {
 
     @TaskAction
     fun generate() {
-        ReproduciblePropertiesWriter.store(createProperties(), manifestFile.get().asFile)
+        createProperties().store(manifestFile.get().asFile)
     }
 
     private
@@ -69,4 +69,9 @@ abstract class ClasspathManifest : DefaultTask() {
 
     private
     fun Iterable<String>.joinForProperties() = sorted().joinToString(",")
+
+    private
+    fun Properties.store(file: File, comment: String? = null) {
+        PropertiesUtils.store(this, file, comment, Charsets.ISO_8859_1, "\n")
+    }
 }

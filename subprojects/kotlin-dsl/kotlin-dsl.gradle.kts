@@ -18,8 +18,9 @@ import build.futureKotlin
 import build.kotlin
 import build.kotlinVersion
 import codegen.GenerateKotlinDependencyExtensions
-import org.gradle.build.ReproduciblePropertiesWriter
 import org.gradle.gradlebuild.testing.integrationtests.cleanup.WhenNotEmpty
+import org.gradle.internal.util.PropertiesUtils
+import java.util.Properties
 
 
 plugins {
@@ -171,11 +172,9 @@ val writeEmbeddedKotlinDependencies by tasks.registering {
     }
 
     doLast {
-        ReproduciblePropertiesWriter.store(
-            modules.get(),
-            outputFile.get().asFile.apply { parentFile.mkdirs() },
-            null
-        )
+        PropertiesUtils.store(Properties().apply {
+            putAll(modules.get())
+        }, outputFile.get().asFile.apply { parentFile.mkdirs() }, null, Charsets.ISO_8859_1, "\n")
     }
 }
 

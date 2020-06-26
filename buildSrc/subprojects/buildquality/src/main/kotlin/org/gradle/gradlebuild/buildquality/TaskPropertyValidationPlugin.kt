@@ -15,8 +15,8 @@
  */
 package org.gradle.gradlebuild.buildquality
 
-import accessors.java
 import accessors.reporting
+import accessors.sourceSets
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -84,7 +84,7 @@ open class TaskPropertyValidationPlugin : Plugin<Project> {
 
     private
     fun ValidatePlugins.configureValidateTask(validationRuntime: Configuration) {
-        val main by project.java.sourceSets
+        val main by project.sourceSets
         dependsOn(main.output)
         classes.setFrom(main.output.classesDirs)
         classpath.from(main.output) // to pick up resources too

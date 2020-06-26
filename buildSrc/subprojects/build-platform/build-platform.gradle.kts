@@ -29,5 +29,6 @@ dependencies {
             because("Maven Central and JCenter disagree on version 2.9.1 metadata")
         }
         api("com.google.guava:guava:27.1-jre")
+        api("com.google.code.gson:gson:2.7")
     }
 }

@@ -8,7 +8,7 @@ import org.gradle.api.Task
 import org.gradle.api.internal.tasks.testing.junit.result.TestResultSerializer
 import org.gradle.api.reporting.Reporting
 import org.gradle.api.tasks.testing.Test
-import org.gradle.gradlebuild.BuildEnvironment
+import gradlebuild.basics.BuildEnvironment
 import org.gradle.gradlebuild.buildquality.classycle.Classycle
 import org.gradle.gradlebuild.docs.FindBrokenInternalLinks
 import org.gradle.gradlebuild.test.integrationtests.DistributionTest
