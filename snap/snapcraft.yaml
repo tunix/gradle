@@ -1,0 +1,42 @@
+name: gradle
+base: core20
+version: "6.5"
+summary: An open-source build automation tool
+license: Apache-2.0
+description: |
+  Gradle is a build tool with a focus on build automation and support for
+  multi-language development. If you are building, testing, publishing, and
+  deploying software on any platform, Gradle offers a flexible model that can
+  support the entire development lifecycle from compiling and packaging code to
+  publishing web sites. Gradle has been designed to support build automation
+  across multiple languages and platforms including Java, Scala, Android, C/C++,
+  and Groovy, and is closely integrated with development tools and continuous
+  integration servers including Eclipse, IntelliJ, and Jenkins.
+
+grade: stable
+confinement: devmode
+
+architectures: [s390x, ppc64el, arm64, armhf, amd64, i386]
+
+apps:
+  gradle:
+    command: opt/gradle/bin/gradle
+    environment:
+      JAVA_HOME: $SNAP/usr/lib/jvm/java-8-openjdk-$SNAP_ARCH
+
+parts:
+  java:
+    plugin: nil
+    build-packages:
+      - ca-certificates
+      - ca-certificates-java
+      - openjdk-8-jdk-headless
+    stage-packages:
+      - openjdk-8-jdk-headless
+
+  gradle:
+    plugin: nil
+    source: https://services.gradle.org/distributions/gradle-6.5-bin.zip
+    override-build: |
+      mkdir -p $SNAPCRAFT_PART_INSTALL/opt
+      mv $SNAPCRAFT_PART_BUILD/gradle-6.5 $SNAPCRAFT_PART_INSTALL/opt/gradle
